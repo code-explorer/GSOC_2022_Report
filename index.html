@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+
+    <!-- Normalize.css -->
+    <link rel="stylesheet" href="css/normalize.css" />
+    <!-- Skeleton.css -->
+    <link rel="stylesheet" href="css/skeleton.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>GSoc 2022 Report</title>
+</head>
+
+<body class="content">
+    <div class="bg">
+        <h1 class="container title">Google Summer of Code 2022 @ TARDIS</h1>
+    </div>
+    <div class="container">
+        <br />
+        <h3 class="sub-title">About TARDIS</h3>
+        <p>
+            <a href="https://tardis-sn.github.io/">TARDIS</a> is an open-source
+            Monte Carlo radiative-transfer spectral synthesis code for 1D models of
+            supernova ejecta. It is designed for rapid spectral modelling of
+            supernovae. The mission of the TARDIS community is to develop
+            open-source software instruments to analyze and simulate astronomical
+            transients (supernovae, kilonovae, etc.) for research and education
+            purposes.
+        </p>
+        <p class="center-text">
+            In this report, I go over the various contributions I made to TARDIS
+            over the summer.
+        </p>
+        <hr />
+        <h3 class="sub-title">Work Product</h3>
+        <h4 class="sub-title">Objective 1: Saving Simulations to HDF</h4>
+        <p>
+            TARDIS had an existing method to store simulations to a HDF file.
+            However, there was not enough data being stored in order to re-create
+            the simulation from the HDF file. So, my first objective was to create
+            methods to store and re-create different parts of the simulation. The
+            simulation consists of 3 main parts which are the model, the plasma and
+            the runner.
+        </p>
+        <img class="u-almost-full-width" src="assets/Simulation.svg" alt="Simulation hierarchy" />
+        <ul>
+            <li>
+                PR
+                <a href="https://github.com/tardis-sn/tardis/pull/2052">#2052</a> adds
+                interfaces to store and load the model and runner object from a HDF
+                file.
+            </li>
+        </ul>
+        <h4 class="sub-title">Objective 2: Refactoring model state</h4>
+        <p>
+            TARDIS currently only works with radial 1D models. However, for future
+            expansion, a model was needed which can work with other geometries. The
+            model state was refactored as shown below to allow this:
+        </p>
+        <img class="u-almost-full-width" src="assets/ModelState.svg" alt="Restructured model state" />
+        <ul>
+            <li>
+                PR
+                <a href="https://github.com/tardis-sn/tardis/pull/2075">#2075</a>
+                restructured model state by moving over parts of the Radial1DModel to
+                the Model class.
+            </li>
+            <li>
+                PR <a href="https://github.com/tardis-sn/tardis/pull/2098">#2098</a>
+                adds the composition class.
+            </li>
+            <li>
+                PR
+                <a href="https://github.com/tardis-sn/tardis/pull/2103">#2103</a> adds
+                the geometry class for 1D models.
+            </li>
+            <li>
+                PR
+                <a href="https://github.com/tardis-sn/tardis/pull/2114">#2114</a> adds
+                the new experimental model state which uses the composition and
+                geometry classes.
+            </li>
+            <li>
+                PR
+                <a href="https://github.com/tardis-sn/tardis/pull/2118">#2118</a>
+                replaces the old model state with the new experimental model state.
+            </li>
+        </ul>
+        <hr />
+        <h3 class="sub-title">Future Work</h3>
+        <p>
+        <ul>
+            <li>Removing old model state</li>
+            <li>Replacing Radial1DModel entirely with new Model State</li>
+        </ul>
+        </p>
+        <hr>
+        <h3 class="sub-title">Acknowledgement</h3>
+        <p>I am extremely grateful to everyone at TARDIS especially my mentors - <a
+                href="https://github.com/Rodot-">Jack O'Brien
+            </a>, <a href="https://github.com/AlexHls">Alexander Holas</a>, <a
+                href="https://github.com/andrewfullard"></a> and <a href="https://github.com/marxwillia">Marc
+                Williamson</a> for their incredible support and guidance. I would also like to thank <a
+                href="https://github.com/wkerzendorf">Wolfgang Kerzendorf</a> for helping us fit in and guiding us.</p>
+
+        <p>I would also like to thank my fellow GSoC contributors - <a href="https://github.com/atharva-2001">Atharva
+                Arya</a>,
+            <a href="https://github.com/jayantbhakar">Jayant Bhakar
+            </a> and <a href="https://github.com/rohithvarma3000">Rohith Varma Buddaraju</a> for helping me out.
+        </p>
+        <p>Finally, I would like to thank Google Summer of Code for giving me this wonderful opportunity.</p>
+    </div>
+</body>
+
+</html>
